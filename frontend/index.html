@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Le Shop De Many - Premium</title>
+
+  <audio id="intro-audio" preload="auto" loop>
+    <source src="intro.mp3" type="audio/mpeg">
+  </audio>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+
+  <div class="background"></div>
+
+  <div class="container">
+
+    <!-- 🏠 MENU PRINCIPAL -->
+    <div id="tab-menu" class="tab-content active">
+      <header>
+        <div class="logo-container">
+          <img src="logo.jpg" alt="Le Shop De Many" class="main-logo" id="admin-logo-trigger" onerror="this.style.display='none'">
+        </div>
+        <h1>Le Shop De Many</h1>
+        <p class="subtitle">Produits Premium - 59-62</p>
+      </header>
+
+      <!-- Catégories -->
+      <div class="categories">
+        <button class="cat active" data-cat="all">
+          <span class="cat-icon">🔥</span>
+          <span>Tous</span>
+        </button>
+        <button class="cat" data-cat="douce">
+          <span class="cat-icon">💎</span>
+          <span>Douce</span>
+        </button>
+        <button class="cat" data-cat="dur">
+          <span class="cat-icon">👑</span>
+          <span>Dur</span>
+        </button>
+      </div>
+
+      <!-- Grille produits -->
+      <div class="products" id="products-container">
+        <div class="loading">Chargement...</div>
+      </div>
+
+      <!-- SECTIONS SUPPLÉMENTAIRES -->
+
+      <!-- 📦 COMMENT COMMANDER -->
+      <section class="info-section">
+        <h2 class="section-title">📦 Comment commander ?</h2>
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <div class="step-icon">👆</div>
+            <h3>Choisis ton Produit</h3>
+            <p>Sélectionne ton produit</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <div class="step-icon">📸</div>
+            <h3>Contacte sur Snap</h3>
+            <p>Envoie un message à <a href="https://snapchat.com/add/many.zz5" target="_blank" style="color: #4285F4; text-decoration: underline;">many.zz5</a></p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <div class="step-icon">🚗</div>
+            <h3>Livraison ou sur place</h3>
+            <p>On s'arrange ensemble</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">4</div>
+            <div class="step-icon">🎉</div>
+            <h3>Récupère ton produit</h3>
+            <p>Profite de tes Variétés !</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ⭐ POURQUOI LE SHOP DE MANY -->
+      <section class="info-section">
+        <h2 class="section-title">⭐ Pourquoi Le Shop De Many ?</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Livraison rapide</h3>
+            <p>Service express autour de 59-62</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">✅</div>
+            <h3>100% qualité</h3>
+            <p>Tous nos produits sont de la plus haute qualité</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">💰</div>
+            <h3>Prix imbattables</h3>
+            <p>Des prix très compétitifs</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">💬</div>
+            <h3>Réponse rapide</h3>
+            <p>Disponible sur Snap 7j/7</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ❓ FAQ -->
+      <section class="info-section">
+        <h2 class="section-title">❓ Questions fréquentes</h2>
+        <div class="faq-container">
+          <div class="faq-item">
+            <div class="faq-question">
+              <span class="faq-icon">🔋</span>
+              <strong>Quels sont vos horaires ?</strong>
+            </div>
+            <div class="faq-answer">
+              Nous faisons 12h à 00h tous les jours 7j/7
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span class="faq-icon">🚗</span>
+              <strong>Comment se passe la livraison ?</strong>
+            </div>
+            <div class="faq-answer">
+              Livraison autour de 59-62 ! 
+              Tu peux aussi venir récupérer sur place. On s'arrange par Snap.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span class="faq-icon">🍓</span>
+              <strong>Avez-vous beaucoup de variétés ?</strong>
+            </div>
+            <div class="faq-answer">
+              Je vous laisse aller voir mes cartes produits avec les infos détaillées 
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span class="faq-icon">🔌</span>
+              <strong>C'est de qualité ?</strong>
+            </div>
+            <div class="faq-answer">
+              Oui ! Tous nos produits vendus sont de qualité Premium 
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 📸 CTA FINAL -->
+      <section class="cta-section">
+        <div class="cta-card">
+          <h2>🔥 Prêt à commander ?</h2>
+          <p>Contacte-moi maintenant</p>
+          <a href="https://snapchat.com/add/many.zz5" target="_blank" class="cta-button">
+            📸 many.zz5
+          </a>
+          <p class="cta-footer">⚡ Réponse rapide • 🔒 Sérieux • 🤫 Discret</p>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- 🔧 ADMIN PANEL -->
+    <div id="tab-admin" class="tab-content">
+      <div class="page-card-improved">
+        <!-- Header admin -->
+        <div class="info-header">
+          <h1>🔐 Panel Admin</h1>
+          <p style="color: var(--tg-theme-hint-color); font-size: 0.9rem; margin-top: 5px;">Le Shop De Many Admin</p>
+          <div class="header-decoration"></div>
+        </div>
+
+        <!-- Message d'accès restreint -->
+        <div id="admin-access-denied" class="admin-section" style="text-align: center; padding: 60px 20px;">
+          <div style="font-size: 4rem; margin-bottom: 20px;">🔒</div>
+          <h2 style="color: var(--tg-theme-text-color); margin-bottom: 15px;">Accès Restreint</h2>
+          <p style="color: var(--tg-theme-hint-color); margin-bottom: 10px;">Cette section est protégée par code</p>
+          <p style="color: var(--tg-theme-hint-color); font-size: 0.9rem;">Veuillez entrer le code d'accès pour continuer</p>
+          <button class="admin-btn" style="margin-top: 20px;" onclick="showAdminLogin()">🔐 S'authentifier</button>
+        </div>
+
+        <!-- Contenu admin (caché par défaut) -->
+        <div id="admin-content" style="display: none;">
+          <!-- Section Ajouter Produit -->
+          <div class="admin-section">
+            <h2>➕ Ajouter un nouveau produit</h2>
+            <div class="add-product-form">
+              <div class="form-group">
+                <label>Nom du produit</label>
+                <input type="text" id="new-product-name" placeholder="Ex: Produit Premium" class="admin-input">
+              </div>
+              <div class="form-group">
+                <label>Catégorie</label>
+                <select id="new-product-category" class="admin-input">
+                  <option value="">Sélectionner une catégorie</option>
+                  <option value="douce">💎 Douce</option>
+                  <option value="dur">👑 Dur</option>
+                  <option value="custom">🆕 Personnalisée</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Prix</label>
+                <input type="text" id="new-product-price" placeholder="Ex: 1G: 20€, 2G: 35€, 3G: 50€..." class="admin-input">
+              </div>
+              <div class="form-group">
+                <label>Quantité</label>
+                <input type="text" id="new-product-puffs" placeholder="Ex: 1G, 2G, 3G..." class="admin-input">
+              </div>
+              <div class="form-group">
+                <label>Photo/vidéo du produit</label>
+                <input type="file" id="new-product-media" accept="image/*,video/*" class="admin-input">
+                <div id="media-preview" style="margin-top: 10px;"></div>
+                <small style="color: var(--tg-theme-hint-color); font-size: 0.8rem; margin-top: 5px; display: block;">
+                  📸 Photos (JPG, PNG) ou 🎥 Vidéos (MP4, MOV) supportés
+                  <br>Taille maximale: 50MB
+                </small>
+              </div>
+              <div class="form-group">
+                <label>Description</label>
+                <textarea id="new-product-desc" placeholder="Description du produit..." class="admin-input" rows="3"></textarea>
+              </div>
+              <button class="admin-btn" onclick="addNewProduct()">➕ Créer le produit</button>
+            </div>
+          </div>
+
+          <!-- Section Produits Existants -->
+          <div class="admin-section">
+            <h2>📦 Produits existants</h2>
+            <div class="admin-controls">
+              <button class="admin-btn" onclick="refreshProducts()">🔄 Actualiser</button>
+            </div>
+            
+            <div class="products-list" id="admin-products-list">
+              <!-- Les produits seront chargés ici -->
+            </div>
+          </div>
+
+          <!-- Section statistiques -->
+          <div class="admin-section">
+            <h2>📊 Statistiques</h2>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-number" id="total-products">2</div>
+                <div class="stat-label">Produits actifs</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-number">10€</div>
+                <div class="stat-label">Prix unique</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Saveurs disponibles</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section messages -->
+          <div class="admin-section">
+            <h2>💬 Messages récents</h2>
+            <div class="messages-container">
+              <div class="message-item">
+                <div class="message-user">Utilisateur anonyme</div>
+                <div class="message-text">Bonjour, je veux commander un JNR 16K</div>
+                <div class="message-time">Il y a 2h</div>
+              </div>
+              <div class="message-item">
+                <div class="message-user">Client potentiel</div>
+                <div class="message-text">Quels sont les goûts disponibles ?</div>
+                <div class="message-time">Il y a 5h</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section configuration -->
+          <div class="admin-section">
+            <h2>⚙️ Configuration</h2>
+            <div class="config-form">
+              <div class="form-group">
+                <label>Nom du contact Snapchat</label>
+                <input type="text" id="snap-username" value="many.zz5" class="admin-input" readonly>
+                <small style="color: var(--tg-theme-hint-color); font-size: 0.8rem; margin-top: 5px; display: block;">
+                  <a href="https://snapchat.com/add/many.zz5" target="_blank" style="color: #4285F4;">📸 Voir sur Snapchat</a>
+                </small>
+              </div>
+              <div class="form-group">
+                <label>Prix par défaut</label>
+                <input type="number" id="default-price" value="10" class="admin-input">
+              </div>
+              <button class="admin-btn save-btn" onclick="saveConfig()">💾 Sauvegarder</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 📞 CONTACT -->
+    <div id="tab-contact" class="tab-content">
+      <div class="page-card-improved">
+        <!-- Header contact -->
+        <div class="info-header">
+          <div class="logo-container-small">
+            <img src="logo.jpg" alt="Le Shop De Many" class="info-logo" onerror="this.style.display='none'">
+          </div>
+          <h1>Contact</h1>
+          <div class="header-decoration"></div>
+        </div>
+
+        <!-- Informations de contact direct -->
+        <div class="direct-contact-section">
+          <h2>📲 Contact direct</h2>
+          <div class="contact-methods">
+            <a href="https://snapchat.com/add/many.zz5" target="_blank" class="contact-method-card">
+              <div class="contact-icon">📸</div>
+              <div class="contact-info">
+                <h3>Snapchat</h3>
+                <p>many.zz5</p>
+                <span class="contact-badge">Rapide</span>
+              </div>
+              <div class="contact-arrow">→</div>
+            </a>
+            
+            <div class="contact-method-card">
+              <div class="contact-icon">📍</div>
+              <div class="contact-info">
+                <h3>Localisation</h3>
+                <p>59-62</p>
+                <span class="contact-badge">Sur place</span>
+              </div>
+              <div class="contact-arrow">→</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Horaires -->
+        <div class="hours-section">
+          <h2>🕐 Horaires de disponibilité</h2>
+          <div class="hours-grid">
+            <div class="hours-item">
+              <span class="hours-day">Lundi - Vendredi</span>
+              <span class="hours-time">12H - 00h</span>
+            </div>
+            <div class="hours-item">
+              <span class="hours-day">Samedi</span>
+              <span class="hours-time">12h - 00h</span>
+            </div>
+            <div class="hours-item">
+              <span class="hours-day">Dimanche</span>
+              <span class="hours-time">12h - 00h</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ℹ️ INFOS - VERSION AMÉLIORÉE -->
+    <div id="tab-infos" class="tab-content">
+      <div class="page-card-improved">
+
+        <!-- Header avec logo -->
+        <div class="info-header">
+          <div class="logo-container-small">
+            <img src="logo.jpg" alt="Le Shop De Many" class="info-logo" onerror="this.style.display='none'">
+          </div>
+          <h1>Le Shop De Many</h1>
+          <div class="header-decoration"></div>
+        </div>
+
+        <!-- Carte produit principale -->
+        <div class="product-highlight-card">
+          <div class="highlight-badge">🔥 Produits Premium</div>
+          <h2>Tout Type De Produits</h2>
+          <p class="highlight-description">
+            Je propose des <strong>Produits</strong> de qualité premium,
+            avec de <strong>nombreuse Variétés</strong> ! 💨
+          </p>
+        </div>
+
+        <!-- Grille d'informations -->
+        <div class="info-cards-grid">
+          <div class="info-mini-card">
+            <div class="mini-card-icon">💶</div>
+            <div class="mini-card-content">
+              <h3>Prix</h3>
+              <p>Voir Les Cartes Produits</p>
+            </div>
+          </div>
+
+          <div class="info-mini-card">
+            <div class="mini-card-icon">📍</div>
+            <div class="mini-card-content">
+              <h3>Localisation</h3>
+              <p>59-62</p>
+            </div>
+          </div>
+
+          <div class="info-mini-card">
+            <div class="mini-card-icon">🚗</div>
+            <div class="mini-card-content">
+              <h3>Livraison</h3>
+              <p>Possible autour de la zone</p>
+            </div>
+          </div>
+
+          <div class="info-mini-card">
+            <div class="mini-card-icon">🤝</div>
+            <div class="mini-card-content">
+              <h3>Sur place</h3>
+              <p>Également disponible</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section contact améliorée -->
+        <div class="contact-section-improved">
+          <div class="contact-intro">
+            <h2>📲 Comment me contacter ?</h2>
+            <p>Pour commander ou avoir des infos sur les Produits disponibles</p>
+          </div>
+
+          <!-- Bouton Snap principal -->
+          <div class="snap-button-container">
+            <a href="https://snapchat.com/add/many.zz5" target="_blank" class="snap-button-large">
+              <div class="snap-icon">📸</div>
+              <div class="snap-info">
+                <span class="snap-label">Snapchat</span>
+                <span class="snap-username">many.zz5</span>
+              </div>
+              <div class="snap-arrow">→</div>
+            </a>
+          </div>
+
+          <!-- Badges de confiance -->
+          <div class="trust-badges">
+            <div class="trust-badge">
+              <span class="badge-icon">⚡</span>
+              <span class="badge-text">Réponse rapide</span>
+            </div>
+            <div class="trust-badge">
+              <span class="badge-icon">🔒</span>
+              <span class="badge-text">Sérieux</span>
+            </div>
+            <div class="trust-badge">
+              <span class="badge-icon">🤫</span>
+              <span class="badge-text">Discret</span>
+            </div>
+          </div>
+
+          <!-- CTA final -->
+          <div class="final-cta">
+            <p class="cta-text">👉 N'hésite pas à ajouter et venir en DM !</p>
+            <p class="cta-subtext">Je réponds rapidement à toutes les questions 💬</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MODAL PRODUIT -->
+  <div id="product-modal" class="product-modal">
+    <div class="product-modal-content">
+      <button class="modal-close" onclick="closeProductModal()">✕</button>
+      <div id="modal-product-details"></div>
+    </div>
+  </div>
+
+  <!-- CARTE DE CONNEXION ADMIN -->
+  <div id="admin-login-modal" class="admin-login-overlay" style="display: none;">
+    <div class="admin-login-card">
+      <div class="admin-login-header">
+        <div class="logo-container-small">
+          <img src="logo.jpg" alt="Le Shop De Many" class="info-logo" onerror="this.style.display='none'">
+        </div>
+        <h1>🔐 Accès Admin</h1>
+        <p>Le Shop De Many Panel</p>
+      </div>
+      
+      <div class="admin-login-form">
+        <div class="form-group">
+          <label for="admin-code-input">Code d'accès</label>
+          <input type="password" id="admin-code-input" placeholder="Entrez votre code" class="admin-input">
+        </div>
+        
+        <div class="admin-login-actions">
+          <button class="admin-btn login-btn" onclick="submitAdminCode()">
+            <span class="btn-icon">🔓</span>
+            <span>Se connecter</span>
+          </button>
+          <button class="admin-btn cancel-btn" onclick="cancelAdminLogin()">
+            <span class="btn-icon">❌</span>
+            <span>Annuler</span>
+          </button>
+        </div>
+        
+        <div class="admin-login-footer">
+          <p>🔒 Accès sécurisé • Code requis</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION BOTTOM -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-tab="menu">
+      <span class="icon">🏠</span>
+      <span class="label">Menu</span>
+    </button>
+
+    <button class="nav-item" data-tab="contact">
+      <span class="icon">📞</span>
+      <span class="label">Contact</span>
+    </button>
+
+    <button class="nav-item" data-tab="infos">
+      <span class="icon">ℹ️</span>
+      <span class="label">Infos</span>
+    </button>
+
+    <button class="nav-item action" id="sound-toggle">🔇</button>
+  </nav>
+
+  <script src="script.js"></script>
+</body>
+</html>
