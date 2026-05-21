@@ -11,6 +11,10 @@ import time
 import threading
 import os
 from flask import Flask
+from dotenv import load_dotenv
+
+# Charger les variables d'environnement depuis .env
+load_dotenv()
 
 app = Flask(__name__)
 
