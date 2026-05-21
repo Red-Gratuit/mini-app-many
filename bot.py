@@ -83,7 +83,7 @@ NOUS TE LAISSONS NAVIGUER SUR NOTRE MINI-APP 📱
                     'web_app': {'url': MINI_APP_URL}
                 }
             ]
-        }
+        ]
     }
     
     print(f"📤 Envoi message à {chat_id}")
