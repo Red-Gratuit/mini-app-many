@@ -10,7 +10,7 @@ import json
 import time
 import threading
 import os
-from flask import Flask
+from flask import Flask, request, jsonify
 from dotenv import load_dotenv
 
 # Charger les variables d'environnement depuis .env
@@ -18,7 +18,23 @@ load_dotenv()
 
 app = Flask(__name__)
 
-# Configuration du bot
+# ==========================================
+# ROUTES API - WEBHOOK
+# ==========================================
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    """Endpoint pour le webhook Telegram"""
+    try:
+        update = request.json
+        handle_message(update)
+        return jsonify({'ok': True})
+    except Exception as e:
+        print(f"Erreur webhook: {e}")
+        return jsonify({'ok': False}), 500
+
+# ==========================================
+# CONFIGURATION DU BOT
+# ==========================================
 BOT_TOKEN = os.environ.get('BOT_TOKEN')
 MINI_APP_URL = os.environ.get('MINI_APP_URL')
 CANAL_URL = 'https://t.me/LeShopDeMany'  # URL directe du canal
@@ -166,15 +182,42 @@ def bot_polling():
             print(f"Erreur dans la boucle du bot: {e}")
             time.sleep(10)  # Attendre plus longtemps en cas d'erreur
 
+def set_webhook():
+    """Configurer le webhook pour Railway"""
+    webhook_url = f"{MINI_APP_URL}/webhook"
+    data = {'url': webhook_url}
+    
+    try:
+        response = requests.post(f"{TELEGRAM_API_URL}/setWebhook", json=data)
+        result = response.json()
+        if result.get('ok'):
+            print(f"✅ Webhook configuré: {webhook_url}")
+        else:
+            print(f"❌ Erreur webhook: {result}")
+        return result.get('ok', False)
+    except Exception as e:
+        print(f"Erreur configuration webhook: {e}")
+        return False
+
 def start_bot_thread():
     """Démarrer le bot dans un thread séparé"""
     if not BOT_TOKEN:
         print("❌ BOT_TOKEN non défini")
         return
     
+    # Essayer de configurer le webhook pour Railway
+    if MINI_APP_URL:
+        webhook_success = set_webhook()
+        if webhook_success:
+            print("🤖 Bot Telegram configuré avec webhook")
+            return  # Ne pas démarrer le polling si webhook configuré
+        else:
+            print("⚠️ Webhook échoué, utilisation du polling")
+    
+    # Fallback: utiliser le polling
     bot_thread = threading.Thread(target=bot_polling, daemon=True)
     bot_thread.start()
-    print("🤖 Bot Telegram démarré en arrière-plan")
+    print("🤖 Bot Telegram démarré en arrière-plan (polling)")
 
 # Point d'entrée pour le bot
 if __name__ == '__main__':
