@@ -246,6 +246,10 @@ if __name__ == '__main__':
         from bot import set_webhook
         MINI_APP_URL = os.environ.get('MINI_APP_URL', 'https://web-production-77d3d.up.railway.app')
         
+        # S'assurer que l'URL a le protocole HTTPS
+        if MINI_APP_URL and not MINI_APP_URL.startswith('https://'):
+            MINI_APP_URL = 'https://' + MINI_APP_URL
+        
         if MINI_APP_URL:
             webhook_url = f"{MINI_APP_URL}/webhook"
             set_webhook(webhook_url)

@@ -12,6 +12,9 @@ import os
 # Configuration
 BOT_TOKEN = os.environ.get('BOT_TOKEN')
 MINI_APP_URL = os.environ.get('MINI_APP_URL', 'https://web-production-77d3d.up.railway.app')
+# S'assurer que l'URL a le protocole HTTPS
+if MINI_APP_URL and not MINI_APP_URL.startswith('https://'):
+    MINI_APP_URL = 'https://' + MINI_APP_URL
 CANAL_URL = 'https://t.me/LeShopDeMany'
 CONTACT_URL = 'https://snapchat.com/add/many.zz5'
 TELEGRAM_API_URL = f"https://api.telegram.org/bot{BOT_TOKEN}"
