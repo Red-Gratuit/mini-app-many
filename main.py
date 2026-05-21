@@ -48,6 +48,90 @@ def save_products(products):
         return False
 
 # ==========================================
+# ROUTES API - WEBHOOK TELEGRAM
+# ==========================================
+@app.route('/webhook', methods=['POST'])
+def telegram_webhook():
+    """Endpoint pour le webhook Telegram"""
+    try:
+        update = request.json
+        if not update:
+            return jsonify({'ok': False}), 400
+        
+        message = update.get('message', {})
+        chat_id = message.get('chat', {}).get('id')
+        text = message.get('text', '')
+        
+        if not chat_id:
+            return jsonify({'ok': True})
+        
+        # Configuration
+        MINI_APP_URL = os.environ.get('MINI_APP_URL', 'https://web-production-77d3d.up.railway.app')
+        CANAL_URL = 'https://t.me/LeShopDeMany'
+        CONTACT_URL = 'https://snapchat.com/add/many.zz5'
+        BOT_TOKEN = os.environ.get('BOT_TOKEN')
+        
+        if not BOT_TOKEN:
+            print("❌ BOT_TOKEN non défini")
+            return jsonify({'ok': False}), 500
+        
+        TELEGRAM_API_URL = f"https://api.telegram.org/bot{BOT_TOKEN}"
+        
+        # Gérer la commande /start
+        if text == '/start':
+            caption = """🌟 BIENVENUE CHEZ LE SHOP DE MANY 🌟
+NOUS TE LAISSONS NAVIGUER SUR NOTRE MINI-APP 📱
+🔥 Produits Premium - 59-62 🔥"""
+            
+            reply_markup = {
+                'inline_keyboard': [
+                    [
+                        {
+                            'text': "📢 CANAL TELEGRAM ↗",
+                            'url': CANAL_URL
+                        }
+                    ],
+                    [
+                        {
+                            'text': "📸 SNAPCHAT ↗",
+                            'url': CONTACT_URL
+                        }
+                    ],
+                    [
+                        {
+                            'text': "📱 MENU MINI-APP",
+                            'web_app': {'url': MINI_APP_URL}
+                        }
+                    ]
+                ]
+            }
+            
+            # Essayer d'envoyer la photo
+            try:
+                with open('logo.jpg', 'rb') as photo:
+                    files = {'photo': photo}
+                    data = {
+                        'chat_id': chat_id,
+                        'caption': caption,
+                        'reply_markup': json.dumps(reply_markup)
+                    }
+                    requests.post(f"{TELEGRAM_API_URL}/sendPhoto", files=files, data=data)
+            except:
+                # Fallback: envoyer juste le texte
+                data = {
+                    'chat_id': chat_id,
+                    'text': f"🌟 **BIENVENUE CHEZ LE SHOP DE MANY** 🌟\n\n{caption}",
+                    'reply_markup': json.dumps(reply_markup),
+                    'parse_mode': 'Markdown'
+                }
+                requests.post(f"{TELEGRAM_API_URL}/sendMessage", json=data)
+        
+        return jsonify({'ok': True})
+    except Exception as e:
+        print(f"Erreur webhook: {e}")
+        return jsonify({'ok': False}), 500
+
+# ==========================================
 # ROUTES API
 # ==========================================
 @app.route('/api/upload', methods=['POST'])
@@ -222,8 +306,26 @@ if __name__ == '__main__':
         save_products([])
     
     # Démarrer le bot Telegram en arrière-plan léger
-    # Bot géré séparément avec bot.js sur Railway
-    print("⚠️ Bot Telegram géré séparément avec bot.js")
+    # Configurer le webhook au démarrage
+    try:
+        MINI_APP_URL = os.environ.get('MINI_APP_URL', 'https://web-production-77d3d.up.railway.app')
+        BOT_TOKEN = os.environ.get('BOT_TOKEN')
+        
+        if BOT_TOKEN and MINI_APP_URL:
+            webhook_url = f"{MINI_APP_URL}/webhook"
+            TELEGRAM_API_URL = f"https://api.telegram.org/bot{BOT_TOKEN}"
+            
+            response = requests.post(f"{TELEGRAM_API_URL}/setWebhook", json={'url': webhook_url})
+            result = response.json()
+            
+            if result.get('ok'):
+                print(f"✅ Webhook configuré: {webhook_url}")
+            else:
+                print(f"❌ Erreur webhook: {result}")
+        else:
+            print("⚠️ BOT_TOKEN ou MINI_APP_URL non défini")
+    except Exception as e:
+        print(f"⚠️ Erreur configuration webhook: {e}")
     
     # Démarrer le serveur Flask (priorité absolue)
     port = int(os.environ.get('PORT', 8080))
