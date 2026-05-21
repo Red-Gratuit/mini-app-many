@@ -4,6 +4,11 @@ require('dotenv').config();
 // Configuration du bot
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
+// Configuration des URLs
+const MINI_APP_URL = process.env.MINI_APP_URL || 'https://web-production-77d3d.up.railway.app';
+const CANAL_URL = 'https://t.me/LeShopDeMany';
+const CONTACT_URL = 'https://snapchat.com/add/many.zz5';
+
 // Handler /start - Message d'accueil avec photo et boutons
 bot.start(async (ctx) => {
   try {
@@ -12,27 +17,27 @@ bot.start(async (ctx) => {
       await ctx.replyWithPhoto(
         { source: 'logo.jpg' }, // Utilise le logo.jpg à la racine du projet
         {
-          caption: `Bienvenue chez Le Shop De Many 🌿
-🌿 et l'ensemble des infos pour commander se trouve 
-sur la Mini-App 📱.
-
-Envoyez /start pour lancer le bot 🤖 de le garder à jours 🟢.`,
+          caption: `🌟 BIENVENUE CHEZ LE SHOP DE MANY �
+NOUS TE LAISSONS NAVIGUER SUR NOTRE MINI-APP 📱
+🔥 Produits Premium - 59-62 �`,
           reply_markup: {
             inline_keyboard: [
               [
                 {
-                  text: "📱 Ouvrir la mini-app",
-                  web_app: { url: process.env.MINI_APP_URL }
+                  text: "� CANAL TELEGRAM ↗",
+                  url: CANAL_URL
                 }
               ],
               [
                 {
-                  text: "📢 Canal ↗",
-                  url: process.env.CANAL_URL
-                },
+                  text: "� SNAPCHAT ↗",
+                  url: CONTACT_URL
+                }
+              ],
+              [
                 {
-                  text: "📞 Contacter ↗", 
-                  url: process.env.CONTACT_URL
+                  text: "� MENU MINI-APP",
+                  web_app: { url: MINI_APP_URL }
                 }
               ]
             ]
@@ -42,28 +47,28 @@ Envoyez /start pour lancer le bot 🤖 de le garder à jours 🟢.`,
     } catch (photoError) {
       // Si la photo ne fonctionne pas, envoyer juste le texte avec les boutons
       console.log('Photo non trouvée, envoi du texte seulement:', photoError.message);
-      await ctx.reply(`🌿 **Bienvenue chez Le Shop De Many** 🌿
+      await ctx.reply(`� **BIENVENUE CHEZ LE SHOP DE MANY** �
 
-🌿 et l'ensemble des infos pour commander se trouve 
-sur la Mini-App 📱.
-
-Envoyez /start pour lancer le bot 🤖 de le garder à jours 🟢.`, {
+NOUS TE LAISSONS NAVIGUER SUR NOTRE MINI-APP 📱
+🔥 Produits Premium - 59-62 �`, {
         reply_markup: {
           inline_keyboard: [
             [
               {
-                text: "📱 Ouvrir la mini-app",
-                web_app: { url: process.env.MINI_APP_URL }
+                text: "� CANAL TELEGRAM ↗",
+                url: CANAL_URL
               }
             ],
             [
               {
-                text: "📢 Canal ↗",
-                url: process.env.CANAL_URL
-              },
+                text: "� SNAPCHAT ↗",
+                url: CONTACT_URL
+              }
+            ],
+            [
               {
-                text: "📞 Contacter ↗", 
-                url: process.env.CONTACT_URL
+                text: "� MENU MINI-APP",
+                web_app: { url: MINI_APP_URL }
               }
             ]
           ]
