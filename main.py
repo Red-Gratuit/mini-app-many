@@ -7,6 +7,7 @@ Serveur web + Bot Telegram combinés
 
 import os
 import json
+import requests
 from flask import Flask, send_from_directory, request, jsonify
 from datetime import datetime
 import threading
