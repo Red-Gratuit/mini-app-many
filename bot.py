@@ -58,6 +58,7 @@ def send_photo(chat_id, caption, reply_markup=None):
 
 def handle_start(chat_id):
     """Gérer la commande /start"""
+    print(f"🎯 Traitement /start pour chat_id: {chat_id}")
     caption = """🌟 BIENVENUE CHEZ LE SHOP DE MANY 🌟
 NOUS TE LAISSONS NAVIGUER SUR NOTRE MINI-APP 📱
 🔥 Produits Premium - 59-62 🔥"""
@@ -82,28 +83,37 @@ NOUS TE LAISSONS NAVIGUER SUR NOTRE MINI-APP 📱
                     'web_app': {'url': MINI_APP_URL}
                 }
             ]
-        ]
+        }
     }
     
+    print(f"📤 Envoi message à {chat_id}")
     # Essayer d'envoyer la photo
     result = send_photo(chat_id, caption, json.dumps(reply_markup))
+    print(f"📊 Résultat envoi photo: {result}")
     
     if not result or not result.get('ok'):
         # Fallback: envoyer juste le texte
+        print("⚠️ Photo échouée, envoi texte")
         send_message(chat_id, f"🌟 **BIENVENUE CHEZ LE SHOP DE MANY** 🌟\n\n{caption}", json.dumps(reply_markup))
 
 def handle_message(update):
     """Gérer les messages entrants"""
+    print(f"📨 Message reçu: {update}")
     message = update.get('message', {})
     chat_id = message.get('chat', {}).get('id')
     text = message.get('text', '')
     
+    print(f"📊 Chat ID: {chat_id}, Text: {text}")
+    
     if not chat_id or not text:
+        print("⚠️ Chat ID ou texte manquant")
         return
     
     if text == '/start':
+        print("🚀 Commande /start détectée")
         handle_start(chat_id)
     else:
+        print("❓ Commande inconnue")
         send_message(chat_id, 'Utilisez /start pour accéder à la mini-app Le Shop De Many 🌿')
 
 def set_webhook(webhook_url):
