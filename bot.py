@@ -76,28 +76,28 @@ def get_updates(offset=None):
 
 def handle_start(chat_id):
     """Gérer la commande /start"""
-    caption = """Bienvenue chez Le Shop De Many 🌿
-🌿 et l'ensemble des infos pour commander se trouve 
-sur la Mini-App 📱.
-
-Envoyez /start pour lancer le bot 🤖 de le garder à jours 🟢."""
+    caption = """🌟 BIENVENUE CHEZ LE SHOP DE MANY �
+NOUS TE LAISSONS NAVIGUER SUR NOTRE MINI-APP 📱
+🔥 Produits Premium - 59-62 �"""
     
     reply_markup = {
         'inline_keyboard': [
             [
                 {
-                    'text': "📱 Ouvrir la mini-app",
-                    'web_app': {'url': MINI_APP_URL}
+                    'text': "� CANAL TELEGRAM ↗",
+                    'url': CANAL_URL
                 }
             ],
             [
                 {
-                    'text': "📢 Canal ↗",
-                    'url': CANAL_URL
-                },
-                {
-                    'text': "📞 Contacter ↗",
+                    'text': "� SNAPCHAT ↗",
                     'url': CONTACT_URL
+                }
+            ],
+            [
+                {
+                    'text': "� MENU MINI-APP",
+                    'web_app': {'url': MINI_APP_URL}
                 }
             ]
         ]
@@ -108,7 +108,7 @@ Envoyez /start pour lancer le bot 🤖 de le garder à jours 🟢."""
     
     if not result or not result.get('ok'):
         # Fallback: envoyer juste le texte
-        send_message(chat_id, f"🌿 **Bienvenue chez Le Shop De Many** 🌿\n\n{caption}", json.dumps(reply_markup))
+        send_message(chat_id, f"� **BIENVENUE CHEZ LE SHOP DE MANY** �\n\n{caption}", json.dumps(reply_markup))
 
 def handle_help(chat_id):
     """Gérer la commande /help"""
